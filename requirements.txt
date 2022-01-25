@@ -1,0 +1,10 @@
+apiflask
+flask-SQLAlchemy
+flask-user
+psycopg2-binary
+SQLAlchemy
+email-validator
+bcrypt
+pytest
+nose2
+tox
