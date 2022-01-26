@@ -22,11 +22,12 @@ def test_existe_admin(base_conectada):
 
 def test_existe_tabla_alumnos(base_conectada):
     print('Probando que existan alumnos...')
-    assert len(Alumno.query.all())
-
-
+    assert Alumno.query.all()
+    
+    
 def test_datos_correctos_alumnos(base_conectada):
     print('Probando que los datos de los alumnos sean correctos..')
+    
     def object_as_dict(obj):
         return {c.key: getattr(obj, c.key)
             for c in inspect(obj).mapper.column_attrs}
