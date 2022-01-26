@@ -1,7 +1,8 @@
 from apiflask.validators import OneOf, Length, Range
 from apiflask.fields import String, Integer, Float, Boolean
 from apiflask import Schema
-from data import carreras
+
+carreras = ("Sistemas", "Derecho", "Actuaría", "Arquitectura", "Administración")
 
 class AlumnoSchema(Schema):
     cuenta = Integer(required=True, validate=Range(min=1000000, max=9999999))

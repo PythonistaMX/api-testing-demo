@@ -8,3 +8,5 @@ bcrypt
 pytest
 nose2
 tox
+gunicorn
+requests
