@@ -1,7 +1,7 @@
-from project.models import User
+from apiflaskdemo.project.models import User
 from apiflask import APIBlueprint, abort, input, output
 from apiflask.fields import String
-from project.auth.schemas import LoginSchema
+from apiflaskdemo.project.auth.schemas import LoginSchema
 from flask import session, g
 
 auth_bp = APIBlueprint("auth_bp", __name__)

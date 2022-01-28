@@ -1,7 +1,7 @@
 from apiflask import APIFlask
-from project.models import db, Alumno, User
-from project.blueprints import abc_alumnos
-from project.auth.blueprints import auth_bp
+from apiflaskdemo.project.models import db, Alumno, User
+from apiflaskdemo.project.blueprints import abc_alumnos
+from apiflaskdemo.project.auth.blueprints import auth_bp
 from sqlalchemy import engine, inspect
 
 def create_app():
@@ -50,7 +50,3 @@ def create_app():
     
     #Regresa la aplicación
     return app
-
-if __name__ == '__main__':
-    app = create_app()
-    app.run(host='0.0.0.0', port=3000, debug=True)

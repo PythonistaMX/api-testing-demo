@@ -1,7 +1,7 @@
 import pytest
 from app import create_app
-from project.models import db, Alumno
-from project.schemas import AlumnoSchema
+from apiflaskdemo.project.models import db, Alumno
+from apiflaskdemo.project.schemas import AlumnoSchema
 from flask import Request
 
 app = create_app()

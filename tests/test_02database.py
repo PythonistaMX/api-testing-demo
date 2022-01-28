@@ -1,7 +1,7 @@
 import pytest
-from app import create_app
-from project.models import Alumno, User, db
-from project.schemas import AlumnoSchema
+from apiflaskdemo import create_app
+from apiflaskdemo.project.models import Alumno, User, db
+from apiflaskdemo.project.schemas import AlumnoSchema
 from sqlalchemy import inspect
 
 app = create_app()

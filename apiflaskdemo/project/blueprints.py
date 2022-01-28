@@ -1,7 +1,7 @@
 from apiflask import APIBlueprint, abort, output, input
-from project.auth import login_required
-from project.models import db, Alumno
-from project.schemas import AlumnoSchema, AlumnoInSchema
+from apiflaskdemo.project.auth import login_required
+from apiflaskdemo.project.models import db, Alumno
+from apiflaskdemo.project.schemas import AlumnoSchema, AlumnoInSchema
 from marshmallow.exceptions import ValidationError
 
 abc_alumnos = APIBlueprint('abc_alumno', __name__)
