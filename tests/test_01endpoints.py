@@ -1,5 +1,5 @@
 import pytest
-from app import create_app
+from apiflaskdemo.project import create_app
 from apiflaskdemo.project.models import db, Alumno
 from apiflaskdemo.project.schemas import AlumnoSchema
 from flask import Request
