@@ -36,7 +36,7 @@ def create_app():
                 db.session.commit()
                 
             # Verifica que exista el usuario admin y lo crea si no es así 
-            if not User.query.filter_by(username="admin"):
+            if not User.query.filter_by(username="admin").first():
                 user = User(username='admin',
                            email='example@example.com',
                            password='admin', 
