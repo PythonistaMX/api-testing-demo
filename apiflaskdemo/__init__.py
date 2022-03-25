@@ -2,7 +2,7 @@ from apiflask import APIFlask
 from apiflaskdemo.project.models import db, Alumno, User
 from apiflaskdemo.project.blueprints import abc_alumnos
 from apiflaskdemo.project.auth.blueprints import auth_bp
-from sqlalchemy import engine, inspect
+from sqlalchemy import inspect
 
 def create_app():
     '''Función principal de la aplicación'''
