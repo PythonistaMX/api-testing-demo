@@ -1,4 +1,4 @@
-from apiflask import APIBlueprint, abort, output, input
+from apiflask import APIBlueprint, abort
 from apiflaskdemo.project.auth import login_required
 from apiflaskdemo.project.models import db, Alumno
 from apiflaskdemo.project.schemas import AlumnoSchema, AlumnoInSchema
@@ -7,17 +7,17 @@ from marshmallow.exceptions import ValidationError
 abc_alumnos = APIBlueprint('abc_alumno', __name__)
 
 @abc_alumnos.get("/")
-@output(AlumnoSchema(many=True))
+@abc_alumnos.output(AlumnoSchema(many=True))
 def vuelca_base():
     return Alumno.query.all()
 
 @abc_alumnos.get("/<int:cuenta>")
-@output(AlumnoSchema)
+@abc_alumnos.output(AlumnoSchema)
 def despliega_alumno(cuenta):
     return Alumno.query.get_or_404(cuenta)
 
 @abc_alumnos.delete("/<int:cuenta>")
-@output(AlumnoSchema)
+@abc_alumnos.output(AlumnoSchema)
 @login_required
 def elimina_alumno(cuenta):
     alumno = Alumno.query.get_or_404(cuenta)
@@ -26,8 +26,8 @@ def elimina_alumno(cuenta):
     return alumno
     
 @abc_alumnos.post("/<int:cuenta>")
-@output(AlumnoSchema)
-@input(AlumnoInSchema)
+@abc_alumnos.output(AlumnoSchema)
+@abc_alumnos.input(AlumnoInSchema)
 def crea_alumno(cuenta, data):
     if Alumno.query.filter_by(cuenta=cuenta).first():
         abort(409)
@@ -42,8 +42,8 @@ def crea_alumno(cuenta, data):
         return alumno
 
 @abc_alumnos.put("/<int:cuenta>")
-@output(AlumnoSchema)
-@input(AlumnoInSchema)
+@abc_alumnos.output(AlumnoSchema)
+@abc_alumnos.input(AlumnoInSchema)
 def sustituye_alumno(cuenta, data):
     alumno = Alumno.query.get_or_404(cuenta)
     db.session.delete(alumno)

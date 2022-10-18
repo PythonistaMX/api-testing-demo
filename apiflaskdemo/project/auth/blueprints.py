@@ -1,5 +1,5 @@
 from apiflaskdemo.project.models import User
-from apiflask import APIBlueprint, abort, input, output
+from apiflask import APIBlueprint, abort
 from apiflask.fields import String
 from apiflaskdemo.project.auth.schemas import LoginSchema
 from flask import session, g
@@ -15,7 +15,7 @@ def user_checkout():
         g.user = User.query.filter_by(id=user_id).first()
 
 @auth_bp.post("/login")
-@input(LoginSchema)
+@auth_bp.input(LoginSchema)
 def login(data):
     user = User.query.filter_by(username=data["username"]).one_or_none()
     if user and user.password == data["password"]:
