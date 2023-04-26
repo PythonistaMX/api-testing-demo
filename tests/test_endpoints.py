@@ -9,8 +9,8 @@ app = create_app()
 @pytest.fixture
 def client():
     with app.test_client() as client:
-        with app.app_context():
-            db.init_app(app)
+        #with app.app_context():
+            # db.init_app(app)
         yield client
 
 

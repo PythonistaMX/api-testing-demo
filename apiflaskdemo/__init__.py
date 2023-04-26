@@ -15,8 +15,7 @@ def create_app():
     # Se incializa la conexión entre SQLALchemy y la base de datos
     db.init_app(app) 
     
-    @app.before_first_request
-    def crea_bases():
+    with app.app_context():
         '''Función encargada de verificar que exista una base de datos  con
            las tablas de alumnos y de usuarios pobladas correctamente. 
             En caso de no existir, es creada'''

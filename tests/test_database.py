@@ -11,7 +11,7 @@ app = create_app()
 def base_conectada():
     print("Conectando a base de datos...")
     with app.app_context() as conectada:
-        db.init_app(app)
+        # db.init_app(app)
         yield conectada
 
 
