@@ -6,4 +6,3 @@ pytest
 tox
 coverage
 Flask-SQLAlchemy
-tox-venv
