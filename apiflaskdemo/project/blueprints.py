@@ -33,10 +33,7 @@ def crea_alumno(cuenta, data):
         abort(409)
     else: 
         data["cuenta"] = cuenta
-        try:
-            alumno = Alumno(**AlumnoSchema().load(data))
-        except ValidationError:
-            return abort(400)
+        alumno = Alumno(**AlumnoSchema().load(data))
         db.session.add(alumno)
         db.session.commit()
         return alumno, 201
