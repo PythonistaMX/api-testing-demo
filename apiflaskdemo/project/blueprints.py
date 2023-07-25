@@ -6,17 +6,17 @@ from marshmallow.exceptions import ValidationError
 
 abc_alumnos = APIBlueprint('abc_alumno', __name__)
 
-@abc_alumnos.get("/")
+@abc_alumnos.get("/alumnos/")
 @abc_alumnos.output(AlumnoSchema(many=True))
 def vuelca_base():
     return Alumno.query.all()
 
-@abc_alumnos.get("/<int:cuenta>")
+@abc_alumnos.get("/alumno/<int:cuenta>")
 @abc_alumnos.output(AlumnoSchema)
 def despliega_alumno(cuenta):
     return Alumno.query.get_or_404(cuenta)
 
-@abc_alumnos.delete("/<int:cuenta>")
+@abc_alumnos.delete("/alumno/<int:cuenta>")
 @abc_alumnos.output(AlumnoSchema)
 @login_required
 def elimina_alumno(cuenta):
@@ -25,7 +25,7 @@ def elimina_alumno(cuenta):
     db.session.commit()
     return alumno
     
-@abc_alumnos.post("/<int:cuenta>")
+@abc_alumnos.post("/alumno/<int:cuenta>")
 @abc_alumnos.output(AlumnoSchema, status_code=201)
 @abc_alumnos.input(AlumnoInSchema)
 def crea_alumno(cuenta, data):
@@ -38,7 +38,7 @@ def crea_alumno(cuenta, data):
         db.session.commit()
         return alumno, 201
 
-@abc_alumnos.put("/<int:cuenta>")
+@abc_alumnos.put("/alumno/<int:cuenta>")
 @abc_alumnos.output(AlumnoSchema)
 @abc_alumnos.input(AlumnoInSchema)
 def sustituye_alumno(cuenta, data):
