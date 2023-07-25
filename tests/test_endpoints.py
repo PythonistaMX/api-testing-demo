@@ -127,6 +127,15 @@ def test_login(client) -> None:
     assert r.status_code == 200
     print("Se puede iniciar sesión.")
 
+
+def test_login_incorrecto(client) -> None:
+    """Test que comprueba que no se puede iniciar sesión con un usuario incorrecto"""
+    r = client.post('/auth/login', json={"username": "admin", "password": "incorrecto"})
+    print("Validando que no se pueda iniciar sesión con un usuario incorrecto...")
+    assert r.status_code == 403
+    print("No se puede iniciar sesión con un usuario incorrecto.")
+
+
 def test_del_alumno(client) -> None:
     """Test que comprueba que se puede eliminar un alumno"""
     r = client.post('/auth/login', json={"username": "admin", "password": "admin"})
