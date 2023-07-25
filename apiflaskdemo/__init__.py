@@ -1,14 +1,14 @@
 from apiflask import APIFlask
 from apiflaskdemo.project.models import db, Alumno, User
-from apiflaskdemo.project.blueprints import abc_alumnos
+from apiflaskdemo.project.alumno.blueprints import abc_alumnos
 from apiflaskdemo.project.auth.blueprints import auth_bp
-from sqlalchemy import inspect
 from data.alumnos import data_alumnos as alumnos
 
 def create_app():
     '''Función principal de la aplicación'''
     # Crear el objeto app
     app = APIFlask(__name__)
+    
     
     # Obtener la configuración de la aplicación a partir de settings.py
     app.config.from_pyfile("settings.py")
@@ -37,7 +37,7 @@ def create_app():
                 db.session.commit()
                 
     # Registra los blueprints con los endpoints
-    app.register_blueprint(abc_alumnos, url_prefix='/api')
+    app.register_blueprint(abc_alumnos, url_prefix='/api/alumno/')
     app.register_blueprint(auth_bp, url_prefix='/auth')
     
     #Regresa la aplicación

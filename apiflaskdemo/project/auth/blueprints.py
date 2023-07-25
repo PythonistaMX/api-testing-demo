@@ -1,18 +1,21 @@
+"""Blueprints for the auth module."""
+
 from apiflaskdemo.project.models import User
 from apiflask import APIBlueprint, abort
-from apiflask.fields import String
 from apiflaskdemo.project.auth.schemas import LoginSchema
 from flask import session, g
 
 auth_bp = APIBlueprint("auth_bp", __name__)
 
+
 @auth_bp.before_app_request
 def user_checkout():
     user_id = session.get("user_id")
     if user_id is None:
-        g.user =None
+        g.user = None
     else:
         g.user = User.query.filter_by(id=user_id).first()
+
 
 @auth_bp.post("/login")
 @auth_bp.input(LoginSchema)
@@ -24,6 +27,7 @@ def login(data):
         return {'msg': 'logged in'}
     else:
         abort(403)
+
 
 @auth_bp.get("/logout")
 def logout():

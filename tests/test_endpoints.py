@@ -1,3 +1,5 @@
+"""Módulo que contiene los tests de los endpoints de la API"""
+
 import pytest
 from app import create_app
 from apiflaskdemo.project.models import db, Alumno
@@ -16,7 +18,7 @@ def client() -> Request:
 
 def test_get_alumnos(client) -> None:
     """Test que comprueba que se pueden obtener los alumnos"""
-    r = client.get('/api/alumnos/')
+    r = client.get('/api/alumno/alumnos')
     print("Validando que se puedan obtener los alumnos...")
     assert r.status_code == 200
     print("Se pueden obtener los alumnos.")
@@ -91,6 +93,7 @@ def test_post_cuenta_duplicada(client):
     print("Validando que se pueda crear un alumno...")
     assert r.status_code == 409
 
+
 def test_put_alumno(client) -> None:
     """Test que comprueba que se puede actualizar un alumno"""
     alumno = {
@@ -119,6 +122,7 @@ def test_login_required(client) -> None:
     print("Validando que se necesite iniciar sesión para eliminar un alumno...")
     assert r.status_code == 403
     print("Se necesita iniciar sesión para eliminar un alumno.")
+    
 
 def test_login(client) -> None:
     """Test que comprueba que se puede iniciar sesión"""
@@ -144,12 +148,11 @@ def test_del_alumno(client) -> None:
     print("Se puede iniciar sesión.")
     r = client.delete(f'/api/alumno/{data_alumnos[0]["cuenta"]}')
     print("Validando que se pueda eliminar un alumno...")
-    assert r.status_code == 200
+    assert r.status_code == 204
     print("Se puede eliminar un alumno.")
-    print("Validando que los datos del alumno eliminado sean correctos...")
-    alumno_response = AlumnoSchema().dump(r.json)
-    assert alumno_response == data_alumnos[0]
-    print("Datos del alumno eliminado son correctos.")
+    print("Validando que el alumno haya sido eliminado...")
+    r = client.get(f'/api/alumno/{data_alumnos[0]["cuenta"]}')
+    assert r.status_code == 404
 
 
 def test_logout(client) -> None:
