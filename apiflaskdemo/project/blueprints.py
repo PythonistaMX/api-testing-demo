@@ -26,7 +26,7 @@ def elimina_alumno(cuenta):
     return alumno
     
 @abc_alumnos.post("/<int:cuenta>")
-@abc_alumnos.output(AlumnoSchema)
+@abc_alumnos.output(AlumnoSchema, status_code=201)
 @abc_alumnos.input(AlumnoInSchema)
 def crea_alumno(cuenta, data):
     if Alumno.query.filter_by(cuenta=cuenta).first():
@@ -39,7 +39,7 @@ def crea_alumno(cuenta, data):
             return abort(400)
         db.session.add(alumno)
         db.session.commit()
-        return alumno
+        return alumno, 201
 
 @abc_alumnos.put("/<int:cuenta>")
 @abc_alumnos.output(AlumnoSchema)
@@ -51,4 +51,4 @@ def sustituye_alumno(cuenta, data):
     nuevo_alumno = Alumno(**data)
     db.session.add(nuevo_alumno)
     db.session.commit()
-    return nuevo_alumno
+    return  nuevo_alumno
