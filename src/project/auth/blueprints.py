@@ -1,8 +1,8 @@
 """Blueprints for the auth module."""
 
-from apiflaskdemo.project.models import User
+from src.project.models import User
 from apiflask import APIBlueprint, abort
-from apiflaskdemo.project.auth.schemas import LoginSchema
+from src.project.auth.schemas import LoginSchema
 from flask import session, g
 
 auth_bp = APIBlueprint("auth_bp", __name__)

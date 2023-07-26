@@ -2,9 +2,9 @@
 
 
 from apiflask import APIBlueprint, abort
-from apiflaskdemo.project.auth import login_required
-from apiflaskdemo.project.models import db, Alumno
-from apiflaskdemo.project.schemas import AlumnoSchema, AlumnoInSchema
+from src.project.auth import login_required
+from src.project.models import db, Alumno
+from src.project.schemas import AlumnoSchema, AlumnoInSchema
 
 abc_alumnos = APIBlueprint('Gestión de alumnos', __name__)
 

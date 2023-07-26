@@ -2,12 +2,12 @@
 
 import pytest
 from app import create_app
-from apiflaskdemo.project.models import db, Alumno
-from apiflaskdemo.project.schemas import AlumnoSchema
+from src.project.schemas import AlumnoSchema
 from flask import Request
 from data.alumnos import data_alumnos
 
 app = create_app()
+
 
 @pytest.fixture
 def client() -> Request:
@@ -63,7 +63,8 @@ def test_post_alumno(client) -> None:
 
 
 def test_post_alumno_incorrecto(client) -> None:
-    """Test que comprueba que no se puede crear un alumno con un esquema incorrecto"""
+    """Test que comprueba que no se puede crear un alumno con un
+    esquema incorrecto"""
     alumno = {
         "nombre": "Amaranta",
         "segundo_apellido": "García",
@@ -73,7 +74,8 @@ def test_post_alumno_incorrecto(client) -> None:
         "al_corriente": True
         }
     r = client.post('/api/alumno/1234569', json=alumno)
-    print("Validando que no se pueda crear un alumno con un esquema incorrecto...")
+    print("Validando que no se pueda crear un alumno con un esquema \
+          incorrecto...")
     assert r.status_code == 422
     print(r.json)
     print("No se puede crear un alumno con un esquema incorrecto.")
@@ -117,32 +119,39 @@ def test_put_alumno(client) -> None:
 
 
 def test_login_required(client) -> None:
-    """Test que comprueba que se necesita iniciar sesión para eliminar un alumno"""
+    """Test que comprueba que se necesita iniciar sesión para eliminar
+    un alumno"""
     r = client.delete(f'/api/alumno/{data_alumnos[0]["cuenta"]}')
-    print("Validando que se necesite iniciar sesión para eliminar un alumno...")
+    print("Validando que se necesite iniciar sesión para eliminar \
+          un alumno...")
     assert r.status_code == 403
     print("Se necesita iniciar sesión para eliminar un alumno.")
-    
+
 
 def test_login(client) -> None:
     """Test que comprueba que se puede iniciar sesión"""
-    r = client.post('/auth/login', json={"username": "admin", "password": "admin"})
+    r = client.post('/auth/login',
+                    json={"username": "admin", "password": "admin"})
     print("Validando que se pueda iniciar sesión...")
     assert r.status_code == 200
     print("Se puede iniciar sesión.")
 
 
 def test_login_incorrecto(client) -> None:
-    """Test que comprueba que no se puede iniciar sesión con un usuario incorrecto"""
-    r = client.post('/auth/login', json={"username": "admin", "password": "incorrecto"})
-    print("Validando que no se pueda iniciar sesión con un usuario incorrecto...")
+    """Test que comprueba que no se puede iniciar sesión con un
+    usuario incorrecto"""
+    r = client.post('/auth/login',
+                    json={"username": "admin", "password": "incorrecto"})
+    print("Validando que no se pueda iniciar sesión con un usuario \
+          incorrecto...")
     assert r.status_code == 403
     print("No se puede iniciar sesión con un usuario incorrecto.")
 
 
 def test_del_alumno(client) -> None:
     """Test que comprueba que se puede eliminar un alumno"""
-    r = client.post('/auth/login', json={"username": "admin", "password": "admin"})
+    r = client.post('/auth/login',
+                    json={"username": "admin", "password": "admin"})
     print("Validando que se pueda iniciar sesión...")
     assert r.status_code == 200
     print("Se puede iniciar sesión.")
@@ -157,7 +166,8 @@ def test_del_alumno(client) -> None:
 
 def test_logout(client) -> None:
     """Test que comprueba que se puede cerrar sesión"""
-    r = client.post('/auth/login', json={"username": "admin", "password": "admin"})
+    r = client.post('/auth/login',
+                    json={"username": "admin", "password": "admin"})
     print("Validando que se pueda iniciar sesión...")
     assert r.status_code == 200
     print("Se puede iniciar sesión.")

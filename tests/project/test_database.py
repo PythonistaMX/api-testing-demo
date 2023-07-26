@@ -1,8 +1,8 @@
 """Tests para la base de datos de la aplicación."""
 import pytest
-from apiflaskdemo import create_app
-from apiflaskdemo.project.models import Alumno, User
-from apiflaskdemo.project.schemas import AlumnoSchema
+from src import create_app
+from src.project.models import Alumno, User
+from src.project.schemas import AlumnoSchema
 from data.alumnos import data_alumnos
 
 
@@ -30,8 +30,8 @@ def test_existe_tabla_alumnos(base_conectada) -> None:
     print('Probando que existan alumnos...')
     assert Alumno.query.all()
     print('Alumnos existen.')
-    
-    
+
+
 def test_datos_correctos_alumnos(base_conectada) -> None:
     """Test que comprueba que los datos de los alumnos sean correctos"""
     print('Probando que los datos de los alumnos sean correctos..')
