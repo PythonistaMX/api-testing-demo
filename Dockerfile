@@ -1,4 +1,4 @@
-FROM python
+FROM bitnami/python:latest
 RUN mkdir /demo
 RUN pip install --upgrade pip
 RUN pip install virtualenv
@@ -7,7 +7,7 @@ RUN . /demo/venv/bin/activate
 COPY requirements.txt /demo/
 COPY app.py /demo/
 RUN pip install -r /demo/requirements.txt
-ADD ./apiflaskdemo /demo/apiflaskdemo
+ADD ./src /demo/src
 ADD ./data /demo/data
 ENV FLASK_APP=/demo/app.py
 EXPOSE 8080
